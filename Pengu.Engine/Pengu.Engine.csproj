@@ -18,7 +18,7 @@
   <PropertyGroup>
     <Version>0.1.6</Version>
     <Description>MyBlindy's Pengu Vulkan Game Engine</Description>
-    <PackageLicenseUrl>https://github.com/myblindy/MB.Pengu.Engine/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseUrl>https://github.com/myblindy/MB.Pengu.Engine/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/myblindy/MB.Pengu.Engine</PackageProjectUrl>
     <Copyright>Copyright 2020 myblindy</Copyright>
   </PropertyGroup>
