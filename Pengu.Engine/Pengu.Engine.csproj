@@ -12,6 +12,11 @@
     <Prefer32Bit>false</Prefer32Bit>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
+    <AssemblyName>MB.Pengu.Engine</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Version>0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,7 +41,5 @@
   </ItemGroup>
 
   <Import Project="..\Pengu.Dependencies\Pengu.Dependencies.projitems" Label="Shared" />
-
-  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>
