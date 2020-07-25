@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Pengu": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false
+    }
+  }
+}
