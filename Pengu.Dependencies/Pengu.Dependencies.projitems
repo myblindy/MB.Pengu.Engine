@@ -9,14 +9,12 @@
     <Import_RootNamespace>Pengu.Dependencies</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)*.dll">
+    <None Include="$(MSBuildThisFileDirectory)GLFW.NET.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <PackagePath>lib\$(TargetFramework)\</PackagePath>
       <Pack>true</Pack>
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <PackagePath>lib\$(TargetFramework)\</PackagePath>
@@ -29,5 +27,10 @@
       <Pack>true</Pack>
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </None>
+    <Content Include="$(MSBuildThisFileDirectory)glfw.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+    </Content>
   </ItemGroup>
 </Project>
