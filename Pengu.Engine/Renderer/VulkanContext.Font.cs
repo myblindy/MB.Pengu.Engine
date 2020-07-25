@@ -466,12 +466,12 @@ namespace Pengu.Renderer
                 int min = 0, max = Overrides.Count, idx = (max - min) / 2;
                 while (true)
                 {
-                    if (Overrides[idx].start <= needle && Overrides[idx].start + Overrides[idx].count > needle)
-                        return (Overrides[idx].bg, Overrides[idx].fg, Overrides[idx].selected);
+                    if (Overrides[idx].Start <= needle && Overrides[idx].Start + Overrides[idx].Count > needle)
+                        return (Overrides[idx].BG, Overrides[idx].FG, Overrides[idx].Selected);
 
                     if (idx == max || idx == min) return null;
 
-                    if (Overrides[idx].start + Overrides[idx].count <= needle)
+                    if (Overrides[idx].Start + Overrides[idx].Count <= needle)
                         min = idx;
                     else
                         max = idx;
@@ -635,25 +635,25 @@ namespace Pengu.Renderer
 
     public struct FontOverride : IEquatable<FontOverride>
     {
-        internal int start;
-        internal int count;
-        internal FontColor bg;
-        internal FontColor fg;
-        internal bool selected;
+        public int Start { get; private set; }
+        public int Count { get; private set; }
+        public FontColor BG { get; private set; }
+        public FontColor FG { get; private set; }
+        public bool Selected { get; private set; }
 
         public FontOverride(int start, int count, FontColor bg, FontColor fg, bool selected)
         {
-            this.start = start;
-            this.count = count;
-            this.bg = bg;
-            this.fg = fg;
-            this.selected = selected;
+            Start = start;
+            Count = count;
+            BG = bg;
+            FG = fg;
+            Selected = selected;
         }
 
-        public override int GetHashCode() => HashCode.Combine(start, count, bg, fg, selected);
+        public override int GetHashCode() => HashCode.Combine(Start, Count, BG, FG, Selected);
 
         public override bool Equals(object? obj) => obj is FontOverride other && Equals(other);
-        public bool Equals(FontOverride other) => start == other.start && count == other.count && bg == other.bg && fg == other.fg && selected == other.selected;
+        public bool Equals(FontOverride other) => Start == other.Start && Count == other.Count && BG == other.BG && FG == other.FG && Selected == other.Selected;
         public static bool operator ==(FontOverride left, FontOverride right) => left.Equals(right);
         public static bool operator !=(FontOverride left, FontOverride right) => !(left == right);
     }
