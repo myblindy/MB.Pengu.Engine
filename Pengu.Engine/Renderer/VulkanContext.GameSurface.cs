@@ -16,7 +16,7 @@ namespace Pengu.Renderer
         {
             protected VulkanContext Context { get; private set; }
 
-            internal readonly List<RenderableModule> Modules = new List<RenderableModule>();
+            public List<RenderableModule> Modules { get; private set; } = new List<RenderableModule>();
 
             public GameSurface(VulkanContext context) => Context = context;
 
