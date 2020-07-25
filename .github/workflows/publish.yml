@@ -21,7 +21,7 @@ jobs:
         uses: rohith/publish-nuget@v2
         with:
           # Filepath of the project to be packaged, relative to root of repository
-          PROJECT_FILE_PATH: Pengu_Engine/Pengu_Engine.csproj
+          PROJECT_FILE_PATH: Pengu.Engine/Pengu.Engine.csproj
           
           # NuGet package id, used for version detection & defaults to project name
           PACKAGE_NAME: MB.Pengu.Engine
