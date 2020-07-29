@@ -2,7 +2,7 @@
   "profiles": {
     "Pengu.FontGen": {
       "commandName": "Project",
-      "commandLineArgs": "\"pt mono\" 60"
+      "commandLineArgs": "\"pt mono\" 60 fixed"
     }
   }
 }

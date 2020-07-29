@@ -22,9 +22,11 @@ namespace Pengu.FontGen
         {
             if (args.Length < 2)
             {
-                Console.WriteLine("Usage: fontgen \"font-name\" font-size");
+                Console.WriteLine("Usage: fontgen \"font-name\" font-size [fixed]");
                 return;
             }
+
+            var @fixed = args.Length == 3 && args[2] == "fixed";
 
             var chars = new List<char>();
             chars.AddRange(Range('a', 'z'));
@@ -32,6 +34,7 @@ namespace Pengu.FontGen
             chars.AddRange(Range('0', '9'));
             chars.AddRange(" `~!@#$%^&*()_+-=[]\\{}|;':\",./<>?");
             chars.AddRange("─│┌┐└┘├┤┬┴┼═║╒╓╔╕╖╗╘╙╚╛╜╝╞╟╠╡╢╣╤╥╦╧╨╩╪╫╬");
+            chars.AddRange("▖▗▘▙▚▛▜▝▞▟▀▄▌▐░▒▓■◀▶▼▲◦▪");
 
             Dictionary<char, Size> charSizes;
 
@@ -43,7 +46,8 @@ namespace Pengu.FontGen
                     TextFormatFlags.NoPrefix | TextFormatFlags.NoPadding)))
                     .ToDictionary(w => w.ch, w => w.size);
 
-            var area = charSizes.Values.Sum(s => s.Width * s.Height);
+            var fixedSize = charSizes.Values.First();
+            var area = charSizes.Values.Sum(s => @fixed ? fixedSize.Width * fixedSize.Height : s.Width * s.Height);
             var texWidth = (int)(Math.Sqrt(area) * 1.07);
 
             var fn = args[0].Replace(' ', '_');
@@ -57,14 +61,24 @@ namespace Pengu.FontGen
                 int x = 0, y = 0;
                 foreach (var ch in chars)
                 {
-                    var size = charSizes[ch];
+                    var realSize = charSizes[ch];
+                    var size = @fixed ? fixedSize : realSize;
                     if (x + size.Width >= texWidth)
                     {
                         x = 0;
                         y += size.Height;
                     }
 
-                    TextRenderer.DrawText(g, ch.ToString(), font, new Point(x - 15, y), Color.White, TextFormatFlags.NoPrefix);
+                    if (@fixed)
+                    {
+                        using var bmp2 = new Bitmap(100, 100, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        using var g2 = Graphics.FromImage(bmp2);
+                        TextRenderer.DrawText(g2, ch.ToString(), font, Point.Empty, Color.White, TextFormatFlags.NoPrefix | TextFormatFlags.NoPadding);
+                        g.DrawImage(bmp2, new Rectangle(x, y, size.Width, size.Height), new Rectangle(0, 0, realSize.Width, realSize.Height), GraphicsUnit.Pixel);
+                    }
+                    else
+                        TextRenderer.DrawText(g, ch.ToString(), font, new Point(x, y), Color.White, TextFormatFlags.NoPrefix | TextFormatFlags.NoPadding);
+
                     binoutput.Write(ch);
                     binoutput.Write((float)x / texWidth); binoutput.Write((float)y / texWidth);
 
