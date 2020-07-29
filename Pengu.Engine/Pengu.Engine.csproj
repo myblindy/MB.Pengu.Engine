@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>0.1.9</Version>
+    <Version>0.1.10</Version>
     <Description>MyBlindy's Pengu Vulkan Game Engine</Description>
     <PackageLicenseUrl>https://github.com/myblindy/MB.Pengu.Engine/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/myblindy/MB.Pengu.Engine</PackageProjectUrl>
