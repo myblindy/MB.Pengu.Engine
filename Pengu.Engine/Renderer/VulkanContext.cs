@@ -528,7 +528,7 @@ namespace Pengu.Renderer
 
             if (gameSurface.Modules.OfType<CommandBufferRenderableModule>().Any(m => m.IsCommandBufferDirty))
             {
-                Enumerable.Range(0, swapChainImageCommandBuffers.Length).ForEach(idx => swapChainImageCommandBuffersDirty[idx] = true);
+                Enumerable.Range(0, swapChainImageCommandBuffers.Length).ForEach(idx => swapChainImageCommandBuffersDirty[idx + 1] = true);
                 gameSurface.Modules.OfType<CommandBufferRenderableModule>().ForEach(m => m.IsCommandBufferDirty = false);
             }
 
@@ -537,7 +537,7 @@ namespace Pengu.Renderer
             foreach (var module in gameSurface.Modules)
                 SubmitCommandBuffers.AddRange(module.PreRender(nextImage));
 
-            if (swapChainImageCommandBuffersDirty[(int)nextImage])
+            if (swapChainImageCommandBuffersDirty[(int)nextImage + 1])
             {
                 var commandBuffer = swapChainImageCommandBuffers[nextImage];
 
@@ -547,7 +547,7 @@ namespace Pengu.Renderer
                 commandBuffer.EndRenderPass();
                 commandBuffer.End();
 
-                swapChainImageCommandBuffersDirty[(int)nextImage] = false;
+                swapChainImageCommandBuffersDirty[(int)nextImage + 1] = false;
             }
 
             SubmitCommandBuffers.Add(swapChainImageCommandBuffers[nextImage]);
