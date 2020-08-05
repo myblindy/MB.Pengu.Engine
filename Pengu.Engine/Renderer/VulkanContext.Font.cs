@@ -360,7 +360,7 @@ namespace Pengu.Renderer
                         }
 
                     resultCommandBuffer = context.CopyBuffer(stagingVertexIndexBuffer, vertexIndexBuffer,
-                        MaxVertices * FontVertex.Size + UsedIndices * sizeof(ushort));
+                        MaxVertices * FontVertex.Size + MaxIndices * sizeof(ushort));
 
                     IsBufferDataDirty = false;
                 }
